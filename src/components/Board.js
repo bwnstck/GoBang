@@ -3,8 +3,8 @@ import React from "react";
 import Square from "./Square";
 
 export default function Board() {
-  function renderSquare(/* i */) {
-    return <Square />;
+  function renderSquare(index) {
+    return <Square value={index} />;
   }
 
   const status = "Next player: X";
