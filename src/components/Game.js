@@ -35,6 +35,7 @@ export default function Game() {
     return (
       <li key={move}>
         <button
+          className={"historyButton"}
           onClick={() => {
             jumpTo(move);
             console.log(move, desc);

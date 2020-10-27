@@ -1,8 +1,25 @@
 .game {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 /*
 .game-info {
   margin-left: 20px;
 } */
+
+.game-bg {
+  z-index: -4;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background: url(https://i.pinimg.com/originals/5d/97/b8/5d97b8478ab7fefd6af1b85225640e6d.jpg);
+  filter: blur(8px);
+}
+
+.historyButton {
+  padding: 0.5rem;
+  width: 100%;
+}

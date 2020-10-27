@@ -34,6 +34,7 @@ export default function Board(props) {
         {renderSquare(14)}
         {renderSquare(15)}
       </div>
+      <div className="game-bg"></div>
     </div>
   );
 }
