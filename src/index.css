@@ -7,6 +7,9 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: gray;
+  width: 100vw;
+  height: 100vh;
 }
 
 ol,

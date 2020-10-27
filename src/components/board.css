@@ -10,4 +10,9 @@
 
 .resetButton {
   margin-top: 0.5rem;
+  border: none;
+  background-color: rebeccapurple;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 5px;
 }
