@@ -3,6 +3,12 @@
   flex-direction: row;
   position: relative;
 }
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(8, 48px);
+  grid-template-rows: repeat(8, 48px);
+  gap: 0;
+}
 /*
 .game-info {
   margin-left: 20px;

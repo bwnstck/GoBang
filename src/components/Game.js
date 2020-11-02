@@ -57,9 +57,7 @@ export default function Game() {
 
   return (
     <div className="game">
-      <div className="game-board">
-        <Board squares={current.squares} onClick={(i) => handleClick(i)} />
-      </div>
+      <Board squares={current.squares} onClick={(i) => handleClick(i)} />
       <div className="game-info">
         <div>{status}</div>
         <ol>{moves}</ol>
@@ -71,10 +69,10 @@ export default function Game() {
 function calculateWinner(squares) {
   const lines = [
     // Reihenwin
-    [0, 1, 2, 3],
-    [4, 5, 6, 7],
-    [8, 9, 10, 11],
-    [12, 13, 14, 15],
+    [0, 1, 2, 3, 4],
+    [5, 6, 7, 8, 9],
+    [10, 11, 12, 13, 14],
+    [15, 16, 17, 18, 19],
     // Zeilenwin
     [0, 4, 8, 12],
     [1, 5, 9, 13],
@@ -85,12 +83,13 @@ function calculateWinner(squares) {
     [3, 6, 9, 12],
   ];
   for (let i = 0; i < lines.length; i++) {
-    const [a, b, c, d] = lines[i];
+    const [a, b, c, d, e] = lines[i];
     if (
       squares[a] &&
       squares[a] === squares[b] &&
       squares[a] === squares[c] &&
-      squares[a] === squares[d]
+      squares[a] === squares[d] &&
+      squares[a] === squares[e]
     ) {
       return squares[a];
     }
