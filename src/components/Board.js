@@ -19,7 +19,7 @@ export default function Board(props) {
   return (
     <div>
       <div className="status">{status}</div>
-      <div className="board-row">{...squaresFrom(0, 7)}</div>
+      <div className="board-row">{squaresFrom(0, 7)}</div>
       {/* <div className="board-row">{squaresFrom(8, 15)}</div>
       <div className="board-row">{squaresFrom(16, 23)}</div>
       <div className="board-row">{squaresFrom(24, 31)}</div> */}
