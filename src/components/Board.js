@@ -4,31 +4,30 @@ import Square from "./Square";
 import { render } from "react-dom";
 
 export default function Board(props) {
-  const squaresFrom = (min) => {
-    const array = Array(8).fill(null);
-    let i = min;
+  const createAndFillSquares = (i) => {
+    const squares = Array(0).fill(null);
+    for (i; i < i + 8; i++) {
+      squares[i] = i;
+    }
+    console.log(squares);
 
-    array.forEach((element) => {
-      element + i;
-      i++;
-    });
-
-    return array.map((number) => {
-      renderSquare(number);
-    });
+    // return squares.map((square) => (
+    //   <Square
+    //     key={square}
+    //     value={square}
+    //     onClick={() => props.onClick(square)}
+    //   />
+    // ));
   };
 
-  function renderSquare(i) {
-    return <Square value={props.squares[i]} onClick={() => props.onClick(i)} />;
-  }
+  // function renderSquare(i) {
+  //   return <Square value={props.squares[i]} onClick={() => props.onClick(i)} />;
+  // }
 
   return (
     <div>
       <div className="status">{status}</div>
-      <div className="board-row">{squaresFrom(0)}</div>
-      {/* <div className="board-row">{squaresFrom(8, 15)}</div>
-      <div className="board-row">{squaresFrom(16, 23)}</div>
-      <div className="board-row">{squaresFrom(24, 31)}</div> */}
+      <div className="board-row">{createAndFillSquares(0)}</div>
     </div>
   );
 }
