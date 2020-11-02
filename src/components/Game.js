@@ -1,6 +1,12 @@
 import "./game.css";
 import React, { useState } from "react";
 import Board from "./Board";
+import {
+  diagLeftTopRight,
+  diagRightTopLeft,
+  horizontalWins,
+  verticalWins,
+} from "../utils/calculation";
 
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(64).fill(null) }]);
@@ -66,22 +72,39 @@ export default function Game() {
   );
 }
 
+const winningArray = [];
+
+horizontalWins(0, winningArray);
+horizontalWins(8, winningArray);
+horizontalWins(16, winningArray);
+horizontalWins(24, winningArray);
+horizontalWins(32, winningArray);
+horizontalWins(40, winningArray);
+horizontalWins(48, winningArray);
+horizontalWins(56, winningArray);
+
+verticalWins(0, winningArray);
+verticalWins(1, winningArray);
+verticalWins(2, winningArray);
+verticalWins(3, winningArray);
+verticalWins(4, winningArray);
+verticalWins(5, winningArray);
+verticalWins(6, winningArray);
+verticalWins(7, winningArray);
+
+diagRightTopLeft(0, winningArray);
+diagRightTopLeft(1, winningArray);
+diagRightTopLeft(2, winningArray);
+diagRightTopLeft(3, winningArray);
+
+diagLeftTopRight(7, winningArray);
+diagLeftTopRight(6, winningArray);
+diagLeftTopRight(5, winningArray);
+diagLeftTopRight(4, winningArray);
+//!Calculate Winner
+
 function calculateWinner(squares) {
-  const lines = [
-    // Reihenwin
-    [0, 1, 2, 3, 4],
-    [5, 6, 7, 8, 9],
-    [10, 11, 12, 13, 14],
-    [15, 16, 17, 18, 19],
-    // Zeilenwin
-    [0, 4, 8, 12],
-    [1, 5, 9, 13],
-    [2, 6, 10, 14],
-    [3, 7, 11, 15],
-    // Diagonalwin
-    [0, 5, 10, 15],
-    [3, 6, 9, 12],
-  ];
+  const lines = winningArray;
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c, d, e] = lines[i];
     if (
