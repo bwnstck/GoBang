@@ -4,12 +4,18 @@ import Square from "./Square";
 import { render } from "react-dom";
 
 export default function Board(props) {
-  const squaresFrom = (min, max) => {
-    const squareArray = [];
-    for (let i = min; i < max; i++) {
-      squareArray.append(renderSquare(i));
-    }
-    return squareArray;
+  const squaresFrom = (min) => {
+    const array = Array(8).fill(null);
+    let i = min;
+
+    array.forEach((element) => {
+      element + i;
+      i++;
+    });
+
+    return array.map((number) => {
+      renderSquare(number);
+    });
   };
 
   function renderSquare(i) {
@@ -19,7 +25,7 @@ export default function Board(props) {
   return (
     <div>
       <div className="status">{status}</div>
-      <div className="board-row">{squaresFrom(0, 7)}</div>
+      <div className="board-row">{squaresFrom(0)}</div>
       {/* <div className="board-row">{squaresFrom(8, 15)}</div>
       <div className="board-row">{squaresFrom(16, 23)}</div>
       <div className="board-row">{squaresFrom(24, 31)}</div> */}
