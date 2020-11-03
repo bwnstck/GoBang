@@ -6,7 +6,5 @@
   align-content: center;
   text-align: center;
   justify-content: center;
-  color: black;
-  /* grid-template-columns: auto;
-    grid-template-rows: auto 1fr; */
+  color: var(--text);
 }

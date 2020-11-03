@@ -13,7 +13,10 @@ const Titel = styled.h1`
   /* color: red; */
 `;
 
-const Status = styled.h3``;
+const Status = styled.h2`
+  color: var(--primary);
+  text-shadow: 0 0 4px var(--background);
+`;
 
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(64).fill(null) }]);
@@ -31,6 +34,15 @@ export default function Game() {
     // !KickOut Row
     function kickOutHorizontal(i) {
       if (
+        //  !just to right
+        ((i >= 0 && i <= 4) ||
+          (i >= 8 && i <= 12) ||
+          (i >= 16 && i <= 20) ||
+          (i >= 24 && i <= 28) ||
+          (i >= 32 && i <= 36) ||
+          (i >= 40 && i <= 44) ||
+          (i >= 48 && i <= 52) ||
+          (i >= 56 && i <= 60)) &&
         squares[i] !== squares[i + 1] &&
         squares[i] !== squares[i + 2] &&
         squares[i] === squares[i + 3] &&
@@ -41,6 +53,15 @@ export default function Game() {
         squares[i + 2] = null;
       }
       if (
+        //  !just to left
+        ((i >= 59 && i <= 63) ||
+          (i >= 51 && i <= 55) ||
+          (i >= 43 && i <= 47) ||
+          (i >= 35 && i <= 39) ||
+          (i >= 27 && i <= 31) ||
+          (i >= 19 && i <= 23) ||
+          (i >= 11 && i <= 15) ||
+          (i >= 3 && i <= 7)) &&
         squares[i] !== squares[i - 1] &&
         squares[i] !== squares[i - 2] &&
         squares[i] === squares[i - 3] &&
@@ -53,6 +74,8 @@ export default function Game() {
     }
     function kickOutVertical(i) {
       if (
+        //  !just to bottom
+        i <= 39 &&
         squares[i] !== squares[i + 8] &&
         squares[i] !== squares[i + 16] &&
         squares[i] === squares[i + 24] &&
@@ -63,9 +86,11 @@ export default function Game() {
         squares[i + 16] = null;
       }
       if (
+        //  !just to top
+        i >= 24 &&
         squares[i] !== squares[i - 8] &&
-        squares[i] === squares[i - 16] &&
-        squares[i] !== squares[i - 24] &&
+        squares[i] !== squares[i - 16] &&
+        squares[i] === squares[i - 24] &&
         squares[i - 8] &&
         squares[i - 16]
       ) {
@@ -73,11 +98,13 @@ export default function Game() {
         squares[i - 16] = null;
       }
     }
-    squares[i] = xIsNext ? "🦩" : "🦖";
 
-    setHistory(currentHistory.concat([{ squares: squares }]));
+    // squares[i] = xIsNext ? "🦩" : "🦖";
+    squares[i] = xIsNext ? "🔵" : "🔴";
+
     kickOutHorizontal(i);
     kickOutVertical(i);
+    setHistory(currentHistory.concat([{ squares: squares }]));
     setStepNumber(currentHistory.length);
     setXIsNext(!xIsNext);
   }
@@ -87,17 +114,6 @@ export default function Game() {
     setStepNumber(step);
     setXIsNext(step % 2 === 0);
   }
-
-  // // !KickOut Row
-  // function kickOutRow(squares) {
-  //   for (let i = 0; i < squares; i++) {
-  //     const [a, b, c, d] = squares[i];
-  //     if (squares[a] === squares[d]) {
-  //       squares[b] = null;
-  //       squares[c] = null;
-  //     }
-  //   }
-  // }
 
   const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
@@ -124,7 +140,7 @@ export default function Game() {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = `Next player:${xIsNext ? "🦩" : "🦖"}`;
+    status = `Up next: ${xIsNext ? "🔵" : "🔴"}`;
   }
 
   return (

@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+:root {
+  /* CSS HSL */
+  --background: hsla(195, 100%, 6%);
+  --primary: hsla(333, 100%, 45%);
+  --secondary: hsla(205, 94%, 52%);
+  --action: hsla(47, 81%, 56%);
+  --text: hsla(197, 38%, 89%, 1);
+  --box-shadow: -6px 13px 4px 0px #0000009c;
+}
 *,
 *:after,
 *:before {
@@ -5,13 +16,8 @@
 }
 
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
-  background-color: dimgray;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--secondary);
   width: 100vw;
   height: 100vh;
-}
-
-ol,
-ul {
-  padding-left: 30px;
 }
