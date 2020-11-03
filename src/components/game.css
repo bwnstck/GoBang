@@ -1,19 +1,24 @@
 .game {
-  display: flex;
-  flex-direction: row;
-  position: relative;
 }
 .game-board {
   display: grid;
-  grid-template-columns: repeat(8, 48px);
-  grid-template-rows: repeat(8, 48px);
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   gap: 0;
 }
-/*
-.game-info {
-  margin-left: 20px;
-} */
 
+.game-info {
+  margin: 0 1rem;
+  padding: 0;
+  overflow: auto;
+}
+
+.game-info ol {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column-reverse;
+}
 .game-bg {
   z-index: -4;
   position: absolute;

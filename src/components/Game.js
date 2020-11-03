@@ -7,6 +7,13 @@ import {
   horizontalWins,
   verticalWins,
 } from "../utils/calculation";
+import styled from "styled-components";
+
+const Titel = styled.h1`
+  /* color: red; */
+`;
+
+const Status = styled.h3``;
 
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(64).fill(null) }]);
@@ -46,9 +53,9 @@ export default function Game() {
     }
     function kickOutVertical(i) {
       if (
-        squares[i] !== squares[i + 24] &&
         squares[i] !== squares[i + 8] &&
-        squares[i] === squares[i + 16] &&
+        squares[i] !== squares[i + 16] &&
+        squares[i] === squares[i + 24] &&
         squares[i + 8] &&
         squares[i + 16]
       ) {
@@ -56,9 +63,9 @@ export default function Game() {
         squares[i + 16] = null;
       }
       if (
-        squares[i] !== squares[i - 24] &&
         squares[i] !== squares[i - 8] &&
         squares[i] === squares[i - 16] &&
+        squares[i] !== squares[i - 24] &&
         squares[i - 8] &&
         squares[i - 16]
       ) {
@@ -121,13 +128,16 @@ export default function Game() {
   }
 
   return (
-    <div className="game">
-      <Board squares={current.squares} onClick={(i) => handleClick(i)} />
+    <>
+      <div className="game">
+        <Titel>♦️GoBang♦️</Titel>
+        <Board squares={current.squares} onClick={(i) => handleClick(i)} />
+      </div>
+      <Status>{status}</Status>
       <div className="game-info">
-        <div>{status}</div>
         <ol>{moves}</ol>
       </div>
-    </div>
+    </>
   );
 }
 
