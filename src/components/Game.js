@@ -21,9 +21,56 @@ export default function Game() {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+    // !KickOut Row
+    function kickOutHorizontal(i) {
+      if (
+        squares[i] !== squares[i + 1] &&
+        squares[i] !== squares[i + 2] &&
+        squares[i] === squares[i + 3] &&
+        squares[i + 1] &&
+        squares[i + 2]
+      ) {
+        squares[i + 1] = null;
+        squares[i + 2] = null;
+      }
+      if (
+        squares[i] !== squares[i - 1] &&
+        squares[i] !== squares[i - 2] &&
+        squares[i] === squares[i - 3] &&
+        squares[i - 1] &&
+        squares[i - 2]
+      ) {
+        squares[i - 1] = null;
+        squares[i - 2] = null;
+      }
+    }
+    function kickOutVertical(i) {
+      if (
+        squares[i] !== squares[i + 24] &&
+        squares[i] !== squares[i + 8] &&
+        squares[i] === squares[i + 16] &&
+        squares[i + 8] &&
+        squares[i + 16]
+      ) {
+        squares[i + 8] = null;
+        squares[i + 16] = null;
+      }
+      if (
+        squares[i] !== squares[i - 24] &&
+        squares[i] !== squares[i - 8] &&
+        squares[i] === squares[i - 16] &&
+        squares[i - 8] &&
+        squares[i - 16]
+      ) {
+        squares[i - 8] = null;
+        squares[i - 16] = null;
+      }
+    }
     squares[i] = xIsNext ? "🦩" : "🦖";
 
     setHistory(currentHistory.concat([{ squares: squares }]));
+    kickOutHorizontal(i);
+    kickOutVertical(i);
     setStepNumber(currentHistory.length);
     setXIsNext(!xIsNext);
   }
@@ -33,6 +80,18 @@ export default function Game() {
     setStepNumber(step);
     setXIsNext(step % 2 === 0);
   }
+
+  // // !KickOut Row
+  // function kickOutRow(squares) {
+  //   for (let i = 0; i < squares; i++) {
+  //     const [a, b, c, d] = squares[i];
+  //     if (squares[a] === squares[d]) {
+  //       squares[b] = null;
+  //       squares[c] = null;
+  //     }
+  //   }
+  // }
+
   const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
 
