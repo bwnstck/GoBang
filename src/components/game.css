@@ -22,7 +22,7 @@
 }
 ol > :last-child > button {
   font-weight: 700;
-  text-shadow: 0 0 2px var(--background);
+  /* text-shadow: 0 0 2px var(--background); */
 }
 .game-bg {
   z-index: -4;

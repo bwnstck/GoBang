@@ -5,6 +5,8 @@ import {
   diagLeftTopRight,
   diagRightTopLeft,
   horizontalWins,
+  kickOutHorizontal,
+  kickOutVertical,
   verticalWins,
 } from "../utils/calculation";
 import styled from "styled-components";
@@ -31,79 +33,12 @@ export default function Game() {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    // !KickOut Row
-    function kickOutHorizontal(i) {
-      if (
-        //  !just to right
-        ((i >= 0 && i <= 4) ||
-          (i >= 8 && i <= 12) ||
-          (i >= 16 && i <= 20) ||
-          (i >= 24 && i <= 28) ||
-          (i >= 32 && i <= 36) ||
-          (i >= 40 && i <= 44) ||
-          (i >= 48 && i <= 52) ||
-          (i >= 56 && i <= 60)) &&
-        squares[i] !== squares[i + 1] &&
-        squares[i] !== squares[i + 2] &&
-        squares[i] === squares[i + 3] &&
-        squares[i + 1] &&
-        squares[i + 2]
-      ) {
-        squares[i + 1] = null;
-        squares[i + 2] = null;
-      }
-      if (
-        //  !just to left
-        ((i >= 59 && i <= 63) ||
-          (i >= 51 && i <= 55) ||
-          (i >= 43 && i <= 47) ||
-          (i >= 35 && i <= 39) ||
-          (i >= 27 && i <= 31) ||
-          (i >= 19 && i <= 23) ||
-          (i >= 11 && i <= 15) ||
-          (i >= 3 && i <= 7)) &&
-        squares[i] !== squares[i - 1] &&
-        squares[i] !== squares[i - 2] &&
-        squares[i] === squares[i - 3] &&
-        squares[i - 1] &&
-        squares[i - 2]
-      ) {
-        squares[i - 1] = null;
-        squares[i - 2] = null;
-      }
-    }
-    function kickOutVertical(i) {
-      if (
-        //  !just to bottom
-        i <= 39 &&
-        squares[i] !== squares[i + 8] &&
-        squares[i] !== squares[i + 16] &&
-        squares[i] === squares[i + 24] &&
-        squares[i + 8] &&
-        squares[i + 16]
-      ) {
-        squares[i + 8] = null;
-        squares[i + 16] = null;
-      }
-      if (
-        //  !just to top
-        i >= 24 &&
-        squares[i] !== squares[i - 8] &&
-        squares[i] !== squares[i - 16] &&
-        squares[i] === squares[i - 24] &&
-        squares[i - 8] &&
-        squares[i - 16]
-      ) {
-        squares[i - 8] = null;
-        squares[i - 16] = null;
-      }
-    }
 
     // squares[i] = xIsNext ? "🦩" : "🦖";
     squares[i] = xIsNext ? "🔵" : "🔴";
 
-    kickOutHorizontal(i);
-    kickOutVertical(i);
+    kickOutHorizontal(squares, i);
+    kickOutVertical(squares, i);
     setHistory(currentHistory.concat([{ squares: squares }]));
     setStepNumber(currentHistory.length);
     setXIsNext(!xIsNext);
