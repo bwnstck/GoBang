@@ -36,6 +36,11 @@ const PlayerForm = styled.div`
   padding: 0.5rem;
   border-radius: 5px;
 `;
+
+const PlayerTitle = styled.span`
+  font-size: 1.3rem;
+  padding: 0 0.4rem;
+`;
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(64).fill(null) }]);
   const [stepNumber, setStepNumber] = useState(0);
@@ -124,9 +129,9 @@ export default function Game() {
         <PlayerChooser>
           <PlayerForm>
             {player1 ? (
-              <span onClick={() => setOpenPickerPlayer1(true)}>
+              <PlayerTitle onClick={() => setOpenPickerPlayer1(true)}>
                 Player 1: {player1.emoji}
-              </span>
+              </PlayerTitle>
             ) : (
               <span>No emoji Chosen</span>
             )}
@@ -134,9 +139,9 @@ export default function Game() {
           </PlayerForm>
           <PlayerForm>
             {player2 ? (
-              <span onClick={() => setOpenPickerPlayer2(true)}>
+              <PlayerTitle onClick={() => setOpenPickerPlayer2(true)}>
                 Player 2: {player2.emoji}
-              </span>
+              </PlayerTitle>
             ) : (
               <span>No emoji Chosen</span>
             )}
