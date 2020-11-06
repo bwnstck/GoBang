@@ -1,3 +1,7 @@
+.game-board {
+  width: 320px;
+  margin: auto;
+}
 .board-row:after {
   clear: both;
   content: "";
