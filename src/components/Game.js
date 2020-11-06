@@ -11,6 +11,7 @@ import {
   verticalWins,
 } from "../utils/calculation";
 import styled from "styled-components";
+import Picker from "emoji-picker-react";
 
 const Titel = styled.h1`
   /* color: red; */
@@ -20,11 +21,46 @@ const Status = styled.h2`
   color: var(--primary);
   text-shadow: 0 0 4px var(--background);
 `;
-
+const PlayerChooser = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  & > * {
+    margin: 0.5em;
+  }
+`;
+const PlayerForm = styled.div`
+  background-color: var(--primary);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+`;
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(64).fill(null) }]);
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXIsNext] = useState(true);
+
+  const [openPickerPlayer1, setOpenPickerPlayer1] = useState(false);
+  const [openPickerPlayer2, setOpenPickerPlayer2] = useState(false);
+
+  const [player1, setPlayer1] = useState({ emoji: "🔴" });
+  const [player2, setPlayer2] = useState({ emoji: "🔵" });
+
+  const [timerPlayer1, setTimerPlayer1] = useState(0);
+  const [timerPlayer2, setTimerPlayer2] = useState(0);
+  const [timer, setTimer] = useState(0);
+
+  let timerSwitch = null;
+
+  const onEmojiClickP1 = (event, emojiObject) => {
+    setPlayer1(emojiObject);
+    setOpenPickerPlayer1(!openPickerPlayer1);
+  };
+  const onEmojiClickP2 = (event, emojiObject) => {
+    setPlayer2(emojiObject);
+    setOpenPickerPlayer2(!openPickerPlayer2);
+  };
 
   function handleClick(i) {
     const currentHistory = history.slice(0, stepNumber + 1);
@@ -35,8 +71,8 @@ export default function Game() {
       return;
     }
 
+    squares[i] = xIsNext ? player1.emoji : player2.emoji;
     // squares[i] = xIsNext ? "🦩" : "🦖";
-    squares[i] = xIsNext ? "🔵" : "🔴";
 
     kickOutHorizontal(squares, i);
     kickOutVertical(squares, i);
@@ -77,7 +113,7 @@ export default function Game() {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = `Up next: ${xIsNext ? "🔵" : "🔴"}`;
+    status = `Up next: ${xIsNext ? player1.emoji : player2.emoji}`;
   }
 
   return (
@@ -85,8 +121,30 @@ export default function Game() {
       <div className="game">
         <Titel>♦️GoBang♦️</Titel>
         <Board squares={current.squares} onClick={(i) => handleClick(i)} />
+        <PlayerChooser>
+          <PlayerForm>
+            {player1 ? (
+              <span onClick={() => setOpenPickerPlayer1(true)}>
+                Player 1: {player1.emoji}
+              </span>
+            ) : (
+              <span>No emoji Chosen</span>
+            )}
+            {openPickerPlayer1 ? <Picker onEmojiClick={onEmojiClickP1} /> : ""}
+          </PlayerForm>
+          <PlayerForm>
+            {player2 ? (
+              <span onClick={() => setOpenPickerPlayer2(true)}>
+                Player 2: {player2.emoji}
+              </span>
+            ) : (
+              <span>No emoji Chosen</span>
+            )}
+            {openPickerPlayer2 ? <Picker onEmojiClick={onEmojiClickP2} /> : ""}
+          </PlayerForm>
+        </PlayerChooser>
+        <Status>{status}</Status>
       </div>
-      <Status>{status}</Status>
       <div className="game-info">
         <ol>{moves}</ol>
       </div>
