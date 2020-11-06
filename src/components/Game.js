@@ -5,6 +5,7 @@ import {
   diagLeftTopRight,
   diagRightTopLeft,
   horizontalWins,
+  kickOutDiag,
   kickOutHorizontal,
   kickOutVertical,
   verticalWins,
@@ -39,6 +40,7 @@ export default function Game() {
 
     kickOutHorizontal(squares, i);
     kickOutVertical(squares, i);
+    kickOutDiag(squares, i);
     setHistory(currentHistory.concat([{ squares: squares }]));
     setStepNumber(currentHistory.length);
     setXIsNext(!xIsNext);

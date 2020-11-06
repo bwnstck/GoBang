@@ -52,18 +52,19 @@ export function diagLeftTopRight(startPosition = 0, outPutArray) {
     outPutArray.push(array);
   }
 }
+
+function isNumberWithinModulo(number, rows = 8, modulo = 4) {
+  return number % rows <= modulo;
+}
+function isNumberWithin(number, start, end) {
+  return number >= start && number <= end;
+}
+
 // !KickOut Row
 export function kickOutHorizontal(squares, i) {
   if (
-    //  !just to right
-    ((i >= 0 && i <= 4) ||
-      (i >= 8 && i <= 12) ||
-      (i >= 16 && i <= 20) ||
-      (i >= 24 && i <= 28) ||
-      (i >= 32 && i <= 36) ||
-      (i >= 40 && i <= 44) ||
-      (i >= 48 && i <= 52) ||
-      (i >= 56 && i <= 60)) &&
+    //  !just to right 22%8<=4t
+    isNumberWithinModulo(i) &&
     squares[i] !== squares[i + 1] &&
     squares[i] !== squares[i + 2] &&
     squares[i] === squares[i + 3] &&
@@ -117,6 +118,72 @@ export function kickOutVertical(squares, i) {
   ) {
     squares[i - 8] = null;
     squares[i - 16] = null;
+  }
+}
+export function kickOutDiag(squares, i) {
+  if (
+    //  !just to top down left right
+    ((i >= 32 && i <= 36) ||
+      (i >= 24 && i <= 28) ||
+      (i >= 16 && i <= 20) ||
+      (i >= 8 && i <= 12) ||
+      (i >= 0 && i <= 4)) &&
+    squares[i] !== squares[i + 9] &&
+    squares[i] !== squares[i + 18] &&
+    squares[i] === squares[i + 27] &&
+    squares[i + 9] &&
+    squares[i + 18]
+  ) {
+    squares[i + 9] = null;
+    squares[i + 18] = null;
+  }
+  if (
+    //  !just to down top right left
+    ((i >= 35 && i <= 39) ||
+      (i >= 27 && i <= 31) ||
+      (i >= 19 && i <= 23) ||
+      (i >= 11 && i <= 15) ||
+      (i >= 3 && i <= 7)) &&
+    squares[i] !== squares[i + 7] &&
+    squares[i] !== squares[i + 14] &&
+    squares[i] === squares[i + 21] &&
+    squares[i + 7] &&
+    squares[i + 14]
+  ) {
+    squares[i + 7] = null;
+    squares[i + 14] = null;
+  }
+  if (
+    //  !just to down top right left
+    ((i >= 24 && i <= 28) ||
+      (i >= 32 && i <= 36) ||
+      (i >= 40 && i <= 44) ||
+      (i >= 48 && i <= 52) ||
+      (i >= 56 && i <= 60)) &&
+    squares[i] !== squares[i - 7] &&
+    squares[i] !== squares[i - 14] &&
+    squares[i] === squares[i - 21] &&
+    squares[i - 7] &&
+    squares[i - 14]
+  ) {
+    squares[i - 7] = null;
+    squares[i - 14] = null;
+  }
+  if (
+    //  !just to down top right left
+    ((i >= 28 && i <= 31) ||
+      (i >= 36 && i <= 39) ||
+      (i >= 44 && i <= 47) ||
+      (i >= 52 && i <= 55) ||
+      (i >= 60 && i <= 63)) &&
+    squares[i] !== squares[i - 9] &&
+    squares[i] !== squares[i - 18] &&
+    squares[i] === squares[i - 27] &&
+    squares[i - 9] &&
+    squares[i - 18]
+  ) {
+    squares[i - 9] = null;
+    squares[i - 18] = null;
   }
 }
 
