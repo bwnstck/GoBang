@@ -122,7 +122,7 @@ export function kickOutVertical(squares, i) {
 }
 export function kickOutDiag(squares, i) {
   if (
-    //  !just to top down left right
+    //  !↘︎︎
     ((i >= 32 && i <= 36) ||
       (i >= 24 && i <= 28) ||
       (i >= 16 && i <= 20) ||
@@ -138,7 +138,7 @@ export function kickOutDiag(squares, i) {
     squares[i + 18] = null;
   }
   if (
-    //  !just to down top right left
+    //  !↙️
     ((i >= 35 && i <= 39) ||
       (i >= 27 && i <= 31) ||
       (i >= 19 && i <= 23) ||
@@ -154,7 +154,7 @@ export function kickOutDiag(squares, i) {
     squares[i + 14] = null;
   }
   if (
-    //  !just to down top right left
+    //  !↗️
     ((i >= 24 && i <= 28) ||
       (i >= 32 && i <= 36) ||
       (i >= 40 && i <= 44) ||
@@ -170,12 +170,12 @@ export function kickOutDiag(squares, i) {
     squares[i - 14] = null;
   }
   if (
-    //  !just to down top right left
-    ((i >= 28 && i <= 31) ||
-      (i >= 36 && i <= 39) ||
-      (i >= 44 && i <= 47) ||
-      (i >= 52 && i <= 55) ||
-      (i >= 60 && i <= 63)) &&
+    //  !↖️
+    ((i >= 27 && i <= 31) ||
+      (i >= 35 && i <= 39) ||
+      (i >= 43 && i <= 47) ||
+      (i >= 51 && i <= 55) ||
+      (i >= 59 && i <= 63)) &&
     squares[i] !== squares[i - 9] &&
     squares[i] !== squares[i - 18] &&
     squares[i] === squares[i - 27] &&
