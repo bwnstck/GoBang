@@ -13,34 +13,6 @@ import {
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
 
-const Titel = styled.h1`
-  /* color: red; */
-`;
-
-const Status = styled.h2`
-  color: var(--primary);
-  text-shadow: 0 0 4px var(--background);
-`;
-const PlayerChooser = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  & > * {
-    margin: 0.5em;
-  }
-`;
-const PlayerForm = styled.div`
-  background-color: var(--primary);
-  color: white;
-  padding: 0.5rem;
-  border-radius: 5px;
-`;
-
-const PlayerTitle = styled.span`
-  font-size: 1.3rem;
-  padding: 0 0.4rem;
-`;
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(64).fill(null) }]);
   const [stepNumber, setStepNumber] = useState(0);
@@ -52,11 +24,11 @@ export default function Game() {
   const [player1, setPlayer1] = useState({ emoji: "🔴" });
   const [player2, setPlayer2] = useState({ emoji: "🔵" });
 
-  const [timerPlayer1, setTimerPlayer1] = useState(0);
-  const [timerPlayer2, setTimerPlayer2] = useState(0);
-  const [timer, setTimer] = useState(0);
+  // const [timerPlayer1, setTimerPlayer1] = useState(0);
+  // const [timerPlayer2, setTimerPlayer2] = useState(0);
+  // const [timer, setTimer] = useState(0);
 
-  let timerSwitch = null;
+  // let timerSwitch = null;
 
   const onEmojiClickP1 = (event, emojiObject) => {
     setPlayer1(emojiObject);
@@ -204,3 +176,32 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
+const Titel = styled.h1`
+  /* color: red; */
+`;
+
+const Status = styled.h2`
+  color: var(--primary);
+  text-shadow: 0 0 4px var(--background);
+`;
+const PlayerChooser = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  & > * {
+    margin: 0.5em;
+  }
+`;
+const PlayerForm = styled.div`
+  background-color: var(--primary);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+`;
+
+const PlayerTitle = styled.span`
+  font-size: 1.3rem;
+  padding: 0 0.4rem;
+`;
