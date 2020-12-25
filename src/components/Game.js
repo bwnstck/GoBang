@@ -12,6 +12,7 @@ import {
 } from "../utils/calculation";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
+import Changer from "./assets/change.svg";
 
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(64).fill(null) }]);
@@ -109,6 +110,14 @@ export default function Game() {
             )}
             {openPickerPlayer1 ? <Picker onEmojiClick={onEmojiClickP1} /> : ""}
           </PlayerForm>
+          <ChangePlayer
+            src={Changer}
+            alt="change Players"
+            onClick={() => {
+              setPlayer1(player2);
+              setPlayer2(player1);
+            }}
+          />
           <PlayerForm>
             {player2 ? (
               <PlayerTitle onClick={() => setOpenPickerPlayer2(true)}>
@@ -204,4 +213,8 @@ const PlayerForm = styled.div`
 const PlayerTitle = styled.span`
   font-size: 1.3rem;
   padding: 0 0.4rem;
+`;
+
+const ChangePlayer = styled.img`
+  height: 50px;
 `;
